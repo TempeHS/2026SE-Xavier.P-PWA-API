@@ -14,7 +14,7 @@
   "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "workbench.colorTheme": "Default Dark+",
-  "workbench.iconTheme": "vscode-icons",
+  "workbench.iconTheme": "icons",
   "github.copilot.enable": {
     "python": false,
     "html": false,
