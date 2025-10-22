@@ -22,7 +22,12 @@ limiter = Limiter(
 @api.route("/", methods=["GET"])
 @limiter.limit("3/second", override_defaults=False)
 def get():
-    content = dbHandler.extension_get("%")
+    if request.args.get("lang") and request.args.get("lang").isalpha():
+        lang = request.args.get("lang")
+        lang = lang.upper()
+        content = dbHandler.extension_get(lang)
+    else:
+        content = dbHandler.extension_get("%")
     return (content), 200
 
 
@@ -30,7 +35,8 @@ def get():
 @limiter.limit("1/second", override_defaults=False)
 def post():
     data = request.get_json()
-    return data, 201
+    response = dbHandler.extension_add(data)
+    return response
 
 
 if __name__ == "__main__":
